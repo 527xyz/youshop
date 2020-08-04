@@ -1,7 +1,7 @@
 <!--  -->
 <template>
 <div class='login'>
-  <div class="login_box">
+  <div class="login_box" @keyup.enter="login">
     <div class="login_tx">
       <img src="../assets/images/login_tx.png" alt="">
     </div>
