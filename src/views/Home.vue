@@ -34,9 +34,13 @@
             </el-submenu>
           </el-menu>
         </el-aside>
-        <el-main class="main">
-          <router-view></router-view>
-        </el-main>
+        <div class="home_main" :style="{paddingLeft: isCollapse? '64px': '200px'}">
+          <section class="main_section">
+            <el-main class="main">
+              <router-view></router-view>
+            </el-main>
+          </section>
+        </div>
       </el-container>
     </el-container>
   </div>
@@ -130,8 +134,13 @@ export default {
     height: 100%;
   }
   .el-header {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
     display: flex;
     align-items: center;
+    width: 100%;
     height: 60px;
     background: #262a2c;
     .head_logo {
@@ -151,6 +160,11 @@ export default {
     }
   }
   .el-aside {
+    z-index: 100;
+    position: fixed;
+    left: 0;
+    top: 60px;
+    height: 100%;
     background: #333744;
     .el-menu{
       border-right: none;
@@ -178,9 +192,19 @@ export default {
       }
     }
   }
-
-  .el-main {
-    background: #eaedf1;
+  .home_main{
+    width: 100%;
+    height: 100%;
+    padding-top: 60px;
+    box-sizing: border-box;
+    .main_section{
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      background: #eaedf1;
+    }
   }
+  // .el-main {
+  // }
 }
 </style>

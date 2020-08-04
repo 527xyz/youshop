@@ -25,7 +25,10 @@ import {
   Dialog,
   Cascader,
   Timeline,
-  TimelineItem
+  TimelineItem,
+  Switch,
+  Tooltip,
+  MessageBox
 } from 'element-ui'
 
 
@@ -55,4 +58,7 @@ Vue.use(Cascader)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
 
+Vue.use(Switch)
+Vue.use(Tooltip)
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
