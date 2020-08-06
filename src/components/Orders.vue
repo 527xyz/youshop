@@ -9,14 +9,14 @@
     <el-card>
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-input placeholder="请输入内容" :span="2" v-model=orderSearch>
+          <el-input placeholder="请输入内容" :span="2" v-model=requestInfo.query>
             <el-button slot="append" icon="el-icon-search"></el-button>
           </el-input>
         </el-col>
       </el-row>
       <!-- 表格区域 -->
       <el-table :data="orderList" border stripe>
-        <el-table-column type="index"></el-table-column>
+        <el-table-column type="index" label="#"></el-table-column>
         <el-table-column prop="order_number" label="订单编号"></el-table-column>
         <el-table-column prop="order_price" label="订单价格" width=150></el-table-column>
         <el-table-column prop="pay_status" label="是否付款" width=150>
@@ -130,7 +130,6 @@ export default {
       city,
       logistics: false,
       logisticsList: [],
-      orderSearch:""
     };
   },
   //监听属性 类似于data概念
@@ -144,6 +143,7 @@ export default {
       this.$axios.get("orders", { params: this.requestInfo }).then((res) => {
         this.total = res.data.total;
         this.orderList = res.data.goods;
+        // console.log(this.requestInfo.query)
       });
     },
     //分页器改变每页显示条数时

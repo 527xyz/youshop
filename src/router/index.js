@@ -11,6 +11,7 @@ import Params from '../components/Params.vue'
 import Orders from '../components/Orders.vue'
 import Goods from '../components/Goods.vue'
 import Categories from '../components/Categories.vue'
+import GoodsAdd from '../components/GoodsAdd.vue'
 
 const originalPush = VueRouter.prototype.push
    VueRouter.prototype.push = function push(location) {
@@ -44,6 +45,7 @@ const routes = [
       {path:'/orders',component:Orders},
       {path:'/goods',component:Goods},
       {path:'/categories',component:Categories},
+      {path:'/goods/add',component:GoodsAdd},
     ]
   }
 ]

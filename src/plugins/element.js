@@ -28,7 +28,15 @@ import {
   TimelineItem,
   Switch,
   Tooltip,
-  MessageBox
+  MessageBox,
+  Alert,
+  Steps,
+  Step,
+  Tabs,
+  TabPane,
+  CheckboxGroup,
+  Checkbox,
+  Upload
 } from 'element-ui'
 
 
@@ -57,6 +65,14 @@ Vue.use(Dialog)
 Vue.use(Cascader)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
+Vue.use(Alert)
+Vue.use(Steps)
+Vue.use(Step)
+Vue.use(Tabs)
+Vue.use(TabPane)
+Vue.use(CheckboxGroup)
+Vue.use(Checkbox)
+Vue.use(Upload)
 
 Vue.use(Switch)
 Vue.use(Tooltip)
