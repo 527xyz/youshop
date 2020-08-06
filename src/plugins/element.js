@@ -28,7 +28,10 @@ import {
   TimelineItem,
   Switch,
   Tooltip,
-  MessageBox
+  MessageBox,
+  Tree,
+  Select,
+  Option
 } from 'element-ui'
 
 
@@ -57,8 +60,10 @@ Vue.use(Dialog)
 Vue.use(Cascader)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
-
+Vue.use(Tree)
 Vue.use(Switch)
 Vue.use(Tooltip)
+Vue.use(Select)
+Vue.use(Option)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

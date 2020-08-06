@@ -10,8 +10,8 @@
     <el-row :gutter="20">
     <!-- 搜索框 -->
       <el-col :span="8">
-        <el-input placeholder="请输入内容" class="input-with-select" v-model="queryInfo.query" clearable @clear="getUserList">
-          <el-button slot="append" icon="el-icon-search" @click="getUserList"></el-button>
+        <el-input placeholder="请输入内容" class="input-with-select" v-model="queryInfo.query" clearable @clear="getUserList" @keyup.enter.native="changeSearchText">
+          <el-button slot="append" icon="el-icon-search" @click="getUserList" ></el-button>
         </el-input>
       </el-col>
       <!-- 添加用户按钮 -->
@@ -25,7 +25,7 @@
       border
       :data="userList"
       style="width: 100%">
-      <el-table-column type="index" label="#"></el-table-column>
+      <el-table-column type="index" align="center" label="#"></el-table-column>
       <el-table-column
         label="姓名"
         prop="username">
@@ -51,12 +51,13 @@
       </el-table-column>
       <el-table-column
         label="操作"
-        width="180px">
+        width="180px"
+        align="center">
         <template slot-scope="scope">
           <el-button type="primary" icon="el-icon-edit" size="mini" @click="showEditDialog(scope.row.id)"></el-button>
           <el-button type="danger" icon="el-icon-delete" size="mini" @click="delUser(scope.row.id)"></el-button>
           <el-tooltip effect="dark" content="分配角色" placement="top" :enterable="false">
-            <el-button type="warning" icon="el-icon-s-tools" size="mini"></el-button>
+            <el-button type="warning" icon="el-icon-s-tools" size="mini" @click="setRole(scope.row)"></el-button>
           </el-tooltip>
         </template>
       </el-table-column>
@@ -111,6 +112,27 @@
     <div class="dialog-footer">
       <el-button type="primary" @click="updateDialog">确 定</el-button>
       <el-button @click="EditDialog = false">取 消</el-button>
+    </div>
+  </el-dialog>
+  <!-- 分配角色弹窗 -->
+  <el-dialog title="分配角色" :visible.sync="setRoleDialog" width="50%" @close="serRoleDialogClosed">
+    <div>
+      <p>当前用户：{{userInfo.username}}</p>
+      <p>当前角色：{{userInfo.rolename}}</p>
+      <p>分配新角色：
+        <el-select v-model="newRole" placeholder="请选择">
+          <el-option
+            v-for="item in roleList"
+            :key="item.id"
+            :label="item.roleName"
+            :value="item.id">
+          </el-option>
+        </el-select>
+      </p>
+    </div>
+    <div class="dialog-footer">
+      <el-button type="primary" @click="setRoleSend">确 定</el-button>
+      <el-button @click="setRoleDialog = false">取 消</el-button>
     </div>
   </el-dialog>
 </div>
@@ -187,7 +209,15 @@ return {
       { required: true, message: '请输入邮箱地址', trigger: ['change','blur'] },
       { validator: checkEmail, trigger: 'blur' }
     ]
-  }
+  },
+  // 分配角色
+  setRoleDialog:false,
+  userInfo:{
+    username:"",
+    rolename:""
+  },
+  roleList:[],
+  newRole:""
 };
 },
 //监听属性 类似于data概念
@@ -302,6 +332,45 @@ methods: {
         }
       })
     }
+  },
+  changeSearchText:function(){
+    if(!this.queryInfo.query){
+      this.getUserList();
+    }else{
+      this.getUserList();
+    }
+  },
+  // 分配角色
+  setRole:async function(role){
+    this.userInfo.roleId = role.id;
+    this.userInfo.username = role.username;
+    this.userInfo.rolename = role.role_name;
+    this.setRoleDialog = true
+    // 获取所有角色列表
+    let res = await this.$axios.get("/roles")
+    if(res.meta.status != 200){
+      return this.$message.error("获取角色失败！")
+    }else if(res.meta.status == 200){
+      this.roleList = res.data
+    }
+  },
+  setRoleSend:async function(){
+    if(!this.newRole){
+      return this.$message.error("请选择需要分配的角色")
+    }
+    let res = await this.$axios.put(`users/${this.userInfo.roleId}/role`,{
+      rid:this.newRole
+    })
+    if(res.meta.status != 200){
+      return this.$message.error("分配角色失败！")
+    }else if(res.meta.status == 200){
+      this.$message.success("分配角色成功！")
+      this.getUserList()
+    }
+  },
+  serRoleDialogClosed:function(){
+    this.userInfo = {}
+    this.newRole = ""
   }
 },
 //生命周期 - 创建完成（可以访问当前this实例）
@@ -331,5 +400,8 @@ activated() {}, //如果页面有keep-alive缓存功能，这个函数会触发
       display: flex;
       justify-content: flex-end;
     }
+  }
+  .el-dialog p{
+    margin-bottom: 10px;
   }
 </style>

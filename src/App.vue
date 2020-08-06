@@ -67,4 +67,10 @@ body .el-table th.gutter {
     transition: .3s;
     color: #303133;
   }
+  .BMap_cpyCtrl {
+    display:none!important;
+  }
+  .anchorBL{
+      display:none!important;
+  }
 </style>

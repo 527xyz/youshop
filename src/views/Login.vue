@@ -1,16 +1,16 @@
 <!--  -->
 <template>
 <div class='login'>
-  <div class="login_box" @keyup.enter="login">
+  <div class="login_box">
     <div class="login_tx">
       <img src="../assets/images/login_tx.png" alt="">
     </div>
     <el-form class="login_form" :model="loginFrom" :rules="rulesFrom" ref="loginFormRef">
       <el-form-item prop="username">
-        <el-input v-model="loginFrom.username" prefix-icon="el-icon-user-solid" placeholder="请输入账户"></el-input>
+        <el-input v-model="loginFrom.username" prefix-icon="el-icon-user-solid" placeholder="请输入账户" @keyup.enter.native="login"></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="loginFrom.password" type="password" prefix-icon="el-icon-lock" placeholder="请输入密码"></el-input>
+        <el-input v-model="loginFrom.password" type="password" prefix-icon="el-icon-lock" placeholder="请输入密码" @keyup.enter.native="login"></el-input>
       </el-form-item>
       <el-form-item class="btns">
         <el-button type="primary" @click="login">登录</el-button>
@@ -38,7 +38,8 @@ return {
   rulesFrom:{
     username:[{ required: true, message: '请输入用户名', trigger: 'change' },{ min: 3, max: 12, message: '长度在 3 到 12 个字符', trigger: 'blur' }],
     password:[{ required: true, message: '请输入密码', trigger: 'change' },{ min: 6, max: 12, message: '长度在 6 到 12 个字符', trigger: 'blur' }]
-  }
+  },
+  messageFlag:true
 };
 },
 //监听属性 类似于data概念
@@ -55,10 +56,16 @@ methods: {
         password:this.loginFrom.password
       }).then((res)=>{
         if(res.meta.status==200){
-          this.$message({
-            message:"登录成功",
-            type:"success"
-          })
+          if(this.messageFlag){
+            this.$message({
+              message:"登录成功",
+              type:"success"
+            })
+          }
+          this.messageFlag = false
+          setTimeout(()=>{
+            this.messageFlag = true
+          },3000)
           window.sessionStorage.setItem("token",res.data.token)
           setTimeout(()=>{
             this.$router.push({name:"Home"})

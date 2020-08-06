@@ -15,6 +15,7 @@
     "less-loader": "^6.2.0",
     "lodash": "^4.17.19",
     "vue": "^2.6.11",
+    "vue-baidu-map": "^0.21.22",
     "vue-router": "^3.0.7"
   },
   "devDependencies": {
