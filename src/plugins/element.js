@@ -36,7 +36,11 @@ import {
   TabPane,
   CheckboxGroup,
   Checkbox,
-  Upload
+  Upload,
+  Tree,
+  Select,
+  Option,
+  // TreeTable
 } from 'element-ui'
 
 
@@ -74,7 +78,12 @@ Vue.use(CheckboxGroup)
 Vue.use(Checkbox)
 Vue.use(Upload)
 
+Vue.use(Tree)
+// Vue.use(TreeTable)
 Vue.use(Switch)
 Vue.use(Tooltip)
+Vue.use(Select)
+Vue.use(Option)
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
+// Vue.prototype.$TreeTable = TreeTable

@@ -70,4 +70,10 @@ body .el-table th.gutter {
   .ql-editor{
     min-height: 300px!important;
 }
+  .BMap_cpyCtrl {
+    display:none!important;
+  }
+  .anchorBL{
+      display:none!important;
+  }
 </style>
