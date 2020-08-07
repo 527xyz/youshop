@@ -365,6 +365,7 @@ methods: {
       return this.$message.error("分配角色失败！")
     }else if(res.meta.status == 200){
       this.$message.success("分配角色成功！")
+      this.setRoleDialog = false;
       this.getUserList()
     }
   },

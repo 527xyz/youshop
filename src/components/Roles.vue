@@ -52,7 +52,7 @@
         <template slot-scope="scope">
           <el-button type="primary" icon="el-icon-edit" size="mini" @click="editRight(scope.row)">编辑</el-button>
           <el-button type="danger" icon="el-icon-delete" size="mini" @click="delRight(scope.row)">删除</el-button>
-          <el-button type="info" icon="el-icon-setting" size="mini" @click="setRight(scope.row)">分配角色</el-button>
+          <el-button type="info" icon="el-icon-setting" size="mini" @click="setRight(scope.row)">分配权限</el-button>
         </template>
       </el-table-column>
     </el-table>
