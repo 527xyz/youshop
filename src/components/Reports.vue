@@ -79,9 +79,7 @@ export default {
     this.echart();
     var that=this
     window.onresize=function(){
-      console.log(1)
       setTimeout(function(){
-        console.log(2)
         that.echart()
       },100)
     }
