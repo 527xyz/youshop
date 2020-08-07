@@ -23,19 +23,19 @@
       <!-- 权限视图 -->
       <el-table-column type="expand">
         <template slot-scope="scope">
-          <el-row v-for="(item1,i1) in scope.row.children" :class="['borBottom', 'aligncenter', i1==0? 'borTop': '']">
-            <el-col :span="5" :key="item1.id">
+          <el-row v-for="(item1,i1) in scope.row.children" :class="['borBottom', 'aligncenter', i1==0? 'borTop': '']" :key="item1.id">
+            <el-col :span="5" >
               <el-tag closable @close="delRole(scope.row,item1.id)">{{item1.authName}}</el-tag>
               <i class="el-icon-caret-right"></i>
             </el-col>
             <el-col :span="19">
-              <el-row v-for="(item2,i2) in item1.children" :class="['aligncenter', i2==0? '': 'borTop']">
-                <el-col :span="6" :key="item2.id">
+              <el-row v-for="(item2,i2) in item1.children" :class="['aligncenter', i2==0? '': 'borTop']" :key="item2.id">
+                <el-col :span="6" >
                   <el-tag closable type="success" @close="delRole(scope.row,item2.id)">{{item2.authName}}</el-tag>
                   <i class="el-icon-caret-right"></i>
                 </el-col>
                 <el-col :span="18">
-                  <el-tag closable type="warning" v-for="(item3,i3) in item2.children" :key="item3.id" @close="delRole(scope.row,item3.id)">{{item3.authName}}</el-tag>
+                  <el-tag closable type="warning" v-for="(item3) in item2.children" :key="item3.id" @close="delRole(scope.row,item3.id)">{{item3.authName}}</el-tag>
                 </el-col>
               </el-row>
             </el-col>

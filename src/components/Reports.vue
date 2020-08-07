@@ -7,7 +7,7 @@
       <el-breadcrumb-item>数据报表</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <div id="main" style="width: 100%;height:400px;"></div>
+      <div id="main" style=""></div>
     </el-card>
   </div>
 </template>
@@ -60,16 +60,31 @@ export default {
   //监控data中的数据变化
   watch: {},
   //方法集合
-  methods: {},
+  methods: {
+    echart() {
+      var myChart = echarts.init(document.getElementById("main"));
+      this.$axios.get("reports/type/1").then((res) => {
+        const opres = _.merge(res.data, this.options);
+        myChart.setOption(opres);
+        myChart.resize()
+      });
+    },
+  },
   //生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
+  created() {
+    
+  },
   //生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {
-    var myChart = echarts.init(document.getElementById("main"));
-    this.$axios.get("reports/type/1").then((res) => {
-      const opres= _.merge(res.data,this.options)
-      myChart.setOption(opres);
-    });
+    this.echart();
+    var that=this
+    window.onresize=function(){
+      console.log(1)
+      setTimeout(function(){
+        console.log(2)
+        that.echart()
+      },100)
+    }
   },
   beforeCreate() {}, //生命周期 - 创建之前
   beforeMount() {}, //生命周期 - 挂载之前
@@ -81,4 +96,7 @@ export default {
 };
 </script>
 <style  scoped>
+#main{
+  width: 100%;height:400px;margin:0 auto
+}
 </style>
