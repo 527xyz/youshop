@@ -26,14 +26,14 @@
 
       <!-- 表格 -->
       <el-table :data="goodList" style="width: 100%" border stripe>
-        <el-table-column label="#" type="index" width="50"></el-table-column>
-        <el-table-column prop="goods_name" label="商品名称" width="700"></el-table-column>
-        <el-table-column prop="goods_price" label="商品价格(元)" width="100"></el-table-column>
-        <el-table-column prop="goods_weight" label="商品重量" width="100"></el-table-column>
-        <el-table-column prop="add_time" label="创建时间" width="140">
+        <el-table-column label="#" type="index" width="50" align='center'></el-table-column>
+        <el-table-column prop="goods_name" label="商品名称" ></el-table-column>
+        <el-table-column prop="goods_price" label="商品价格(元)" width="100" align='center'></el-table-column>
+        <el-table-column prop="goods_weight" label="商品重量" width="100" align='center'></el-table-column>
+        <el-table-column prop="add_time" label="创建时间" width="150" align='center'>
           <template slot-scope="scope">{{timestampToTime(scope.row.add_time)}}</template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="150" align='center'>
           <template slot-scope="scope">
             <el-button type="primary" icon="el-icon-edit" size="mini"></el-button>
             <el-button

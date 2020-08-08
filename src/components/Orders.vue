@@ -16,7 +16,7 @@
       </el-row>
       <!-- 表格区域 -->
       <el-table :data="orderList" border stripe>
-        <el-table-column type="index" label="#"></el-table-column>
+        <el-table-column type="index" label="#" align='center'></el-table-column>
         <el-table-column prop="order_number" label="订单编号"></el-table-column>
         <el-table-column prop="order_price" label="订单价格" width=150></el-table-column>
         <el-table-column prop="pay_status" label="是否付款" width=150>
@@ -29,7 +29,7 @@
         <el-table-column prop="create_time" label="下单时间" width=200>
           <template slot-scope="scope">{{ timestampToTime(scope.row.create_time)}}</template>
         </el-table-column>
-        <el-table-column  label="操作" width=150>
+        <el-table-column  label="操作" width=150 align='center'>
           <template>
             <el-button type="primary" icon="el-icon-edit" size="mini" @click="showAddress"></el-button>
             <el-button type="success" icon="el-icon-location" size="mini" @click="showLogistics"></el-button>
